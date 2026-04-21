@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Promotor Onboarding — Climate Capital Market</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
+  <!-- Widget Styles -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- ── TOAST NOTIFICATION ──────────────────────────────────── -->
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" id="ticon"></svg>
+    <span id="tmsg"></span>
+  </div>
+
+  <!-- ── NAVIGATION BAR ─────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <img src="assets/ccm_logo.png" alt="CCM Logo" style="width:32px;height:32px;object-fit:contain;flex-shrink:0"/>
+      <div class="nav-brand">Climate Capital Market</div>
+    </div>
+
+    <div class="nav-divider" id="navDivider1" style="display:none"></div>
+
+    <!-- User info pill (shown after prefill) -->
+    <div class="nav-user" id="navUser" style="display:none">
+      <div class="nav-user-avatar" id="navAvatar"></div>
+      <div class="nav-user-info">
+        <div class="nav-user-name"  id="navName"></div>
+        <div class="nav-user-meta"  id="navMeta"></div>
+      </div>
+    </div>
+
+    <div class="nav-divider" id="navDivider2" style="display:none"></div>
+
+    <!-- Save pill -->
+    <div class="save-pill">
+      <span class="sdot" id="sdot"></span>
+      <span id="slbl">Loading…</span>
+    </div>
+  </nav>
+
+  <!-- ── STEP RAIL ───────────────────────────────────────────── -->
+  <div class="rail">
+    <!-- Rendered by renderStepRail() in app.js -->
+    <div class="steps" id="stepsContainer"></div>
+  </div>
+
+  <!-- ── MAIN CONTENT ────────────────────────────────────────── -->
+  <div class="wrap">
+    <!--
+      All pages (1–5) and success screen are injected here
+      by renderAllPages() in app.js.
+      Fields come 100% from config/fields.js — nothing is hardcoded here.
+    -->
+    <div id="pagesContainer"></div>
+  </div>
+
+
+  <!-- ── Suppress Zoho internal WMS WebSocket errors (localhost only) ── -->
+  <script>
+    (function () {
+      var _WS = window.WebSocket;
+      window.WebSocket = function (url, protocols) {
+        var ws = protocols ? new _WS(url, protocols) : new _WS(url);
+        if (typeof url === "string" && url.indexOf("wmssrv") !== -1) {
+          ws.addEventListener("error", function (e) { e.stopImmediatePropagation(); });
+        }
+        return ws;
+      };
+      window.WebSocket.prototype = _WS.prototype;
+      Object.keys(_WS).forEach(function (k) { window.WebSocket[k] = _WS[k]; });
+    })();
+  </script>
+
+  <!-- ── ZOHO CREATOR SDK v2.0 ───────────────────────────────── -->
+  <!--
+    IMPORTANT: SDK v2.0 does NOT require ZOHO.CREATOR.init().
+    ZOHO.CREATOR.API is available directly after this script loads.
+    app.js calls ZOHO.CREATOR.API.addRecord() directly.
+  -->
+  <script src="https://static.zohocdn.com/creator/widgets/version/2.0/widgetsdk-min.js"></script>
+  <!-- v2 SDK (correct) -->
+<script src="https://js.zohostatic.com/creator/widgets/version/2.0/widgetsdkv2.js"></script>
+
+  <!-- ── FIELD CONFIG (must load before app.js) ──────────────── -->
+  <script src="config/fields.js"></script>
+
+  <!-- ── APP LOGIC ───────────────────────────────────────────── -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
