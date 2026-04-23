@@ -1,9 +1,9 @@
 /**
- * app.js — Climate Capital Market | Promotor Onboarding Widget
+ * app.js — Climate Capital Market | Promoter Onboarding Widget
  * ─────────────────────────────────────────────────────────────
  * 3-screen flow:
  *   1. Necessary information    — due diligence docs, finance type, readiness
- *   2. Promotor & project details — registration, company, project basics
+ *   2. Promoter & project details — registration, company, project basics
  *   3. Requirements & sign-off  — certification, capital, declaration
  */
 
@@ -213,8 +213,8 @@ function quickPrefillBasicFields(reg) {
   }
 
   // Name from All_Registrations.Name object
-  set("r_fname",   nm.first_name || promoReg["Promotor_Name.first_name"] || "");
-  set("r_lname",   nm.last_name  || promoReg["Promotor_Name.last_name"]  || "");
+  set("r_fname",   nm.first_name || promoReg["Promoter_Name.first_name"] || "");
+  set("r_lname",   nm.last_name  || promoReg["Promoter_Name.last_name"]  || "");
 
   // Company Email & Mobile directly on All_Registrations record
   set("r_email",   reg.Company_Email || "");
@@ -298,7 +298,7 @@ function applyPrefillResult(res) {
 
   var d = res.data[0];
   // console.log("[CCM] promotor_registration_Report record keys:", Object.keys(d));
-  // console.log("[CCM] record sample — Company_email:", d.Company_email, "| Promotor_Name:", JSON.stringify(d.Promotor_Name), "| Company_Name:", d.Company_Name);
+  // console.log("[CCM] record sample — Company_email:", d.Company_email, "| Promoter_Name:", JSON.stringify(d.Promoter_Name), "| Company_Name:", d.Company_Name);
 
   if (!AppState.existingRegistrationId) {
     AppState.existingRegistrationId = d.ID;
@@ -678,7 +678,7 @@ function applyProjectData(d) {
   }
 
   // Identification & Category
-  var sameCoVal = (d.Same_as_Promotor_Company === 'true' || d.Same_as_Promotor_Company === true);
+  var sameCoVal = (d.Same_as_Promoter_Company === 'true' || d.Same_as_Promoter_Company === true);
   var sameCo = document.getElementById("p_same_co");
   if (sameCo) {
     sameCo.checked = sameCoVal;
@@ -777,7 +777,7 @@ function setPage2Loading(on) {
 
 /* Show user name / company / email / mobile in the nav bar */
 function showNavUser(d) {
-  var nm      = d.Promotor_Name || {};
+  var nm      = d.Promoter_Name || {};
   var fname   = nm.first_name || "";
   var lname   = nm.last_name  || "";
   var fullName= (fname + " " + lname).trim() || d.Company_Name || "User";
@@ -867,7 +867,7 @@ function applyRegistrationData(d) {
   if (lockEl) lockEl.checked = !!(d.Lock === true || d.Lock === 'true' || d.Lock === 1 || d.Lock === '1');
 
   // ── Individual details (secF) ──────────────────────────────
-  var nm = d.Promotor_Name || {};
+  var nm = d.Promoter_Name || {};
   set("r_fname",    strVal(nm.first_name || d.first_name));
   set("r_lname",    strVal(nm.last_name  || d.last_name));
   set("r_email",    strVal(d.Company_email));
@@ -1269,7 +1269,7 @@ function renderFileUploadField(f) {
     <input type="file" id="${f.id}" class="file-input-hidden"${acceptAttr}${multipleAttr} onchange="onFileSelected('${f.id}', ${!!f.preview}, ${!!f.filelist})"/>
     <label for="${f.id}" class="file-upload-btn">
       ${icon}
-      Browse
+      Upload
     </label>
     <span class="file-selected" id="fname_${f.id}"></span>
     ${previewGrid}
@@ -1524,7 +1524,7 @@ function saveStep2() {
   saveStatus("saving", "Saving…");
 
   var regData = {
-    Promotor_Name:    { first_name: v("r_fname"), last_name: v("r_lname") },
+    Promoter_Name:    { first_name: v("r_fname"), last_name: v("r_lname") },
     Company_email:    v("r_email"),
     Mobile_Number:    v("r_mobile") ? "+91" + v("r_mobile") : "",
     Designation:      v("r_desig"),
@@ -1587,7 +1587,7 @@ function saveStep2() {
       data: {
         Lock:                 document.getElementById("project_lock") && document.getElementById("project_lock").checked ? true : false,
         Project_Entity_SPV:   v("p_entity"),
-        Same_as_Promotor_Company:
+        Same_as_Promoter_Company:
           document.getElementById("p_same_co") && document.getElementById("p_same_co").checked ? "true" : "false",
         project_name:         v("p_name"),
         description:          v("Project_Description"),
@@ -1894,7 +1894,7 @@ function submitRegistration() {
   /* ── Payload: Requirements & Sign-off (Step 3) ──────────────── */
   var reqData = {
     Project:  AppState.projectId      || "",
-    Promotor: AppState.registrationId || "",
+    Promoter: AppState.registrationId || "",
     // Services Required From CCM (Step 3 secA_srv)
     Services_Needed_from_CCM: getCheckboxArray("Services_Needed_from_CCM"),
     // Capital Requirement (Step 3 secI)
@@ -1902,7 +1902,7 @@ function submitRegistration() {
     Grant_Subsidy_Sought_In:  v("cap_grant")           ? parseFloat(v("cap_grant"))           : "",
     Equity_Required_In:       v("cap_equity")          ? parseFloat(v("cap_equity"))          : "",
     Debt_Required_In:         v("cap_debt")            ? parseFloat(v("cap_debt"))            : "",
-    Promotor_Equity_In:       v("cap_promotor_equity") ? parseFloat(v("cap_promotor_equity")) : "",
+    Promoter_Equity_In:       v("cap_promotor_equity") ? parseFloat(v("cap_promotor_equity")) : "",
     Funding_Currency_Type:    getCheckboxArray("Funding_Currency_Type"),
     Capital_Type:             getCheckboxArray("cap_type"),
     Expected_Timeline:        getRadioValue("exp_timeline"),
@@ -2052,7 +2052,7 @@ function addAnotherProject() {
     "Total_Land_Area","Built_up_Area_sq_ft","Total_Super_Built_Up_Area","Carpet_Area","Leasable_Area",
     "No_of_Units","No_of_Floors","Lease_Tenure_years","No_of_Buildings","Parking_Area",
     "Total_Project_Cost","Total_Capital_Required","Grant_Subsidy_Sought",
-    "Equity_Required","Debt_Required","Promotor_Equity",
+    "Equity_Required","Debt_Required","Promoter_Equity",
     "cap_note","eq_stack","dt_stack","cap_total","cap_equity","cap_debt","Key_Gaps_Risks",
     "custom_doc_name"
   ];
@@ -2214,7 +2214,7 @@ function onToggleCheckbox(el) {
   onFieldInput(el);
   toggleHideTargets(el.dataset.toggleHide, el.checked);
 
-  // "Same As Promotor Company" → auto-fill Project (SPV) Entity from Company Name
+  // "Same As Promoter Company" → auto-fill Project (SPV) Entity from Company Name
   if (el.id === "p_same_co") {
     var entityEl = document.getElementById("p_entity");
     if (entityEl) {
@@ -2258,7 +2258,7 @@ function toast(type, msg) {
 function getPageTitle(step) {
   return {
     1: "Necessary Information",
-    2: "Promotor & Project Details",
+    2: "Promoter & Project Details",
     3: "Requirements & Sign-Off"
   }[step] || "Step " + step;
 }

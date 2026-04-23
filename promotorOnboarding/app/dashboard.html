@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Promotor Dashboard — Climate Capital Market</title>
+  <title>Promoter Dashboard — Climate Capital Market</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
@@ -781,11 +781,11 @@ var DATA = {
         ]
       },
       {
-        num: 2, state: 'done', title: 'Promotor & Project Details',
+        num: 2, state: 'done', title: 'Promoter & Project Details',
         desc: 'Full promotor registration, project SPV details, financials, and document uploads.',
         submittedOn: '2 Apr 2026',
         checks: [
-          { done:true,  text:'Promotor registration completed'           },
+          { done:true,  text:'Promoter registration completed'           },
           { done:true,  text:'Project SPV record created'                },
           { done:true,  text:'Cover image & gallery uploaded'            },
           { done:true,  text:'KYC, DPR & legal documents uploaded'       }
@@ -817,7 +817,7 @@ var DATA = {
         desc: 'Once approved, a formal mandate is signed and your project is listed on the Climate Capital Market showcase.',
         checks: [
           { done:false, text:'Mandate agreement prepared by CCM' },
-          { done:false, text:'Promotor signs mandate'            },
+          { done:false, text:'Promoter signs mandate'            },
           { done:false, text:'Project goes live on showcase'     }
         ]
       }
@@ -825,7 +825,7 @@ var DATA = {
   },
 
   profile: {
-    /* ── Personal (from Promotor Registration — secF) ── */
+    /* ── Personal (from Promoter Registration — secF) ── */
     firstName:   'Chetan',
     lastName:    'Patil',
     email:       'chetan@privateco.com',
@@ -865,9 +865,9 @@ var DATA = {
   },
 
   quickActions: [
-    { icon:'plus',    title:'Add New Project',  desc:'Start a new project listing',          fn:'goToNewProject' },
-    { icon:'folder',  title:'Data Room',        desc:'View all uploaded files & images',      tab:'dataroom' },
-    { icon:'mail',    title:'Contact Expert',   desc:'expert@climatecapitalmarket.com',        href:'mailto:expert@climatecapitalmarket.com' }
+    { icon:'plus',    title:'Add New Project',  desc:'Start a new project listing',           fn:'goToNewProject' },
+    { icon:'folder',  title:'Data Room',        desc:'View all uploaded files and images',    tab:'dataroom' },
+    { icon:'chat',    title:'Chat with Expert', desc:'Open in-platform expert chat',          fn:'openExpertChat' }
   ]
 };
 
@@ -906,7 +906,8 @@ function svgIcon(name) {
     phone:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.1 1.17 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.17 7.84a16 16 0 006 6l1.21-1.21a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>',
     location: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>',
     leaf:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 19.34A1 1 0 004.8 21C9.07 19 15.32 14.23 17 8z"/><path d="M17 8c0 0-1 5-5 8"/></svg>',
-    folder:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>'
+    folder:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>',
+    chat:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>'
   };
   return icons[name] || '';
 }
@@ -927,7 +928,7 @@ function esc(v) {
 var SIDEBAR_ITEMS = [
   { section: 'Main' },
   { id:'dashboard',    label:'Dashboard',            icon:'grid'  },
-  { id:'onboarding',   label:'Onboarding &amp; Listing', icon:'check' },
+  { id:'onboarding',   label:'Onboarding and Listing', icon:'check' },
   { id:'projects',     label:'My Projects',          icon:'list'  },
   { id:'dataroom',     label:'Data Room',            icon:'folder'             },
   { section: 'Track Services' },
@@ -1025,7 +1026,7 @@ function refreshDashboard() {
 function renderDashboard() {
   /* ── Pull live data from ProfileState + ProjectState ── */
   var rec  = ProfileState.record || {};
-  var nm   = rec.Promotor_Name || {};
+  var nm   = rec.Promoter_Name || {};
   var addr = rec.Address || {};
 
   function zv(v) {
@@ -1066,7 +1067,7 @@ function renderDashboard() {
   var totalCapitalDisplay = totalCapitalRaw > 0 ? fmtCapital(totalCapitalRaw) : (ProjectState.loading ? '…' : '—');
   var capitalLbl = capitalLabel();
 
-  var displayName = fullName || (email ? email.split('@')[0] : 'Promotor');
+  var displayName = fullName || (email ? email.split('@')[0] : 'Promoter');
 
   // CCM Mandate timer — reads CCM_Mandate_Date_and_Time from registration record
   var mandateRaw = rec.CCM_Mandate_Date_and_Time || rec.CCM_Mandate_Date || '';
@@ -1085,7 +1086,7 @@ function renderDashboard() {
   var html =
     '<div class="page-header">' +
       '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">' +
-        '<div><div class="page-title">Promotor Dashboard</div>' +
+        '<div><div class="page-title">Promoter Dashboard</div>' +
         '<div class="page-subtitle">Account Overview at Glance</div></div>' +
         curBadge +
       '</div>' +
@@ -1109,22 +1110,19 @@ function renderDashboard() {
     /* ── Welcome card ── */
     '<div class="card" style="margin-bottom:14px"><div class="card-head">' +
     '<div class="card-badge">W</div>' +
-    '<div class="card-title-group"><div class="card-title">Welcome</div><div class="card-subtitle">Promotor / Projects-Owner</div></div>' +
+    '<div class="card-title-group"><div class="card-title">Welcome</div><div class="card-subtitle">Promoter / Projects-Owner</div></div>' +
     (!profileLoading ? '<div class="card-head-actions"><button class="btn btn-outline btn-sm" onclick="openProfileEdit()">' + svgIcon('edit') + 'Edit Profile</button></div>' : '') +
     '</div><div class="card-body">' +
     (profileLoading
       /* ── skeleton while loading ── */
       ? '<div class="welcome-inner">' +
-        '<div class="welcome-avatar" style="background:var(--border);color:transparent">--</div>' +
         '<div class="welcome-info" style="flex:1">' +
         '<div style="height:20px;width:160px;background:var(--border);border-radius:4px;margin-bottom:10px;animation:pulse 1.2s ease-in-out infinite"></div>' +
         '<div style="height:13px;width:220px;background:var(--border);border-radius:4px;margin-bottom:6px;animation:pulse 1.2s ease-in-out infinite"></div>' +
         '<div style="height:13px;width:180px;background:var(--border);border-radius:4px;animation:pulse 1.2s ease-in-out infinite"></div>' +
-        '<div style="font-size:11px;color:var(--text4);margin-top:10px">Fetching your profile from Zoho…</div>' +
         '</div></div>'
       /* ── real data ── */
       : '<div class="welcome-inner">' +
-        '<div class="welcome-avatar">' + initials + '</div>' +
         '<div class="welcome-info">' +
         '<h2>' + esc(displayName) + '</h2>' +
         '<div class="meta">' +
@@ -1264,12 +1262,12 @@ function renderOnboarding() {
       submittedOn: recDate(ob.necessary, 'Added_Time')
     },
     {
-      num: 2, title: 'Promotor & Project Details',
+      num: 2, title: 'Promoter & Project Details',
       desc: 'Full promotor registration, project SPV details, financials, and document uploads.',
       state: hasRegistration ? 'done' : (hasNecessary ? 'active' : 'pending'),
       checks: [
         { done: hasRegistration,
-          text: 'Promotor registration' + (rec.Company_Name ? ': <strong>' + esc(zstr(rec.Company_Name)) + '</strong>' : (hasRegistration ? ': <strong>Completed</strong>' : ' — not completed')) },
+          text: 'Promoter registration' + (rec.Company_Name ? ': <strong>' + esc(zstr(rec.Company_Name)) + '</strong>' : (hasRegistration ? ': <strong>Completed</strong>' : ' — not completed')) },
         { done: hasProjects,
           text: 'Project record' + (proj && proj[0] ? ': <strong>' + esc(zstr(proj[0].name || proj[0].project_name || '')) + '</strong>' : (hasProjects ? ': <strong>Created</strong>' : ' — not created')) },
         { done: !!(rec.Project_Cover_Image || (proj && proj[0] && proj[0]._raw && proj[0]._raw.Project_Cover_Image)),
@@ -1308,7 +1306,7 @@ function renderOnboarding() {
             else if (kl.includes('promotorequity'))  pe = val;
           });
           return { done: !!eq, text: 'Equity required' + (fmtUSD(eq) ? ': <strong>' + fmtUSD(eq) + '</strong>' : ' — not submitted')
-            + (fmtUSD(pe) ? ' · Promotor equity: <strong>' + fmtUSD(pe) + '</strong>' : '') };
+            + (fmtUSD(pe) ? ' · Promoter equity: <strong>' + fmtUSD(pe) + '</strong>' : '') };
         })(),
         { done: !!(ob.requirements && ob.requirements.Expected_Timeline),
           text: 'Expected timeline' + (zstr(ob.requirements && ob.requirements.Expected_Timeline) ? ': <strong>' + esc(zstr(ob.requirements.Expected_Timeline)) + '</strong>' : ' — not set') }
@@ -1332,7 +1330,7 @@ function renderOnboarding() {
       state: 'pending',
       checks: [
         { done: false, text: 'Mandate agreement prepared by CCM' },
-        { done: false, text: 'Promotor signs mandate' },
+        { done: false, text: 'Promoter signs mandate' },
         { done: false, text: 'Project goes live on showcase' }
       ]
     }
@@ -1393,7 +1391,7 @@ function renderOnboarding() {
   var html =
     '<div class="page-header">' +
       '<div>' +
-        '<div class="page-title">Onboarding &amp; Listing</div>' +
+        '<div class="page-title">Onboarding and Listing</div>' +
         '<div class="page-subtitle">Track Registration and Project Listing Process</div>' +
         obSelectorHtml +
       '</div>' +
@@ -1414,7 +1412,7 @@ function renderOnboarding() {
     '</div>' +
 
     '<div class="card"><div class="card-head"><div class="card-badge">O</div>' +
-    '<div class="card-title-group"><div class="card-title">Onboarding &amp; Listing Steps</div>' +
+    '<div class="card-title-group"><div class="card-title">Onboarding and Listing Steps</div>' +
     '<div class="card-subtitle">' + totalSteps + ' steps · ' + stepsCompleted + ' completed' + (inProgressCount ? ' · ' + inProgressCount + ' in progress' : '') + '</div></div>' +
     '<div class="card-head-actions">' + completeProfileBtn + '</div>' +
     '</div><div class="card-body"><div class="ob-steps">';
@@ -1530,7 +1528,7 @@ function renderProjectCard(p) {
           (p.locked
             ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>'
             : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>') +
-          '<div class="lock-tooltip">' + (p.locked ? '&#128274; Identity Hidden — Disclosed on Acceptance by Promotor' : '&#128275; Identity Visible — Click to Lock') + '</div>' +
+          '<div class="lock-tooltip">' + (p.locked ? '&#128274; Identity Hidden — Disclosed on Acceptance by Promoter' : '&#128275; Identity Visible — Click to Lock') + '</div>' +
         '</div>' +
         '<span class="tag ' + p.statusClass + '">' + esc(p.status) + '</span>' +
       '</div>' +
@@ -1850,7 +1848,7 @@ function renderProjectDetail(p) {
           '<span class="tag ' + p.statusClass + '">' + esc(p.status) + '</span>' +
           '<span class="stage-pill ' + p.stageClass + '">' + esc(p.stage) + '</span>' +
           (p.cert ? '<span class="pbadge pbadge-cert">' + esc(p.cert) + '</span>' : '') +
-          (p.locked ? '<div class="lock-badge-inline" style="margin-left:auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><div class="lock-tooltip">Disclosed on Acceptance by Promotor</div></div>' : '') +
+          (p.locked ? '<div class="lock-badge-inline" style="margin-left:auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><div class="lock-tooltip">Disclosed on Acceptance by Promoter</div></div>' : '') +
         '</div>' +
         '<div class="pd-hero-name">' + esc(p.name) + '</div>' +
         (zvp(r.Project_Entity_SPV) ? '<div class="pd-hero-entity">' + esc(zvp(r.Project_Entity_SPV)) + '</div>' : '') +
@@ -1964,21 +1962,21 @@ function renderDataRoom() {
   // ── Gather sections ─────────────────────────────────────────────────
   var sections = [];
 
-  // 1. Promotor & Project Profiles
+  // 1. Promoter & Project Profiles
   var profileFiles = [].concat(
     drFiles('Corporate Presentation',  nec.upload_corporate_presentation),
     drFiles('Project (SPV) Brochure',  nec.Upload_project_SPV_brochure)
   );
-  sections.push({ title:'Promotor & Project Profiles', icon:'user', files: profileFiles });
+  sections.push({ title:'Promoter & Project Profiles', icon:'user', files: profileFiles });
 
-  // 2. Audited Financials — Promotor
+  // 2. Audited Financials — Promoter
   var finPromFiles = [].concat(
     drFiles('FY 2025-26', nec.Financial_Year_2025_26),
     drFiles('FY 2024-25', nec.Financial_Year_2024_25),
     drFiles('FY 2023-24', nec.Financial_Year_2023_24),
     drFiles('FY 2022-23', nec.Financial_Year_2022_23)
   );
-  sections.push({ title:'Promotor Financials', icon:'list', files: finPromFiles });
+  sections.push({ title:'Promoter Financials', icon:'list', files: finPromFiles });
 
   // 3. Audited Financials — SPV (merged from all projects or from nec)
   var finSpvFiles = [].concat(
@@ -2029,14 +2027,14 @@ function renderDataRoom() {
     );
     sections.push({ title: pName + ' — Images & Gallery', icon:'folder', files: imgFiles, isImages: true });
 
-    // 5. Promotor KYC / KYB
+    // 5. Promoter KYC / KYB
     var kycPromFiles = [].concat(
       drFiles('Incorporation Certificate', r.Incorporation_Certificate),
       drFiles('MOA',                       r.MOA),
       drFiles('AOA',                       r.AOA),
       drFiles('GST Registration',          r.GST_Registration)
     );
-    sections.push({ title: pName + ' — Promotor KYC / KYB', icon:'check', files: kycPromFiles });
+    sections.push({ title: pName + ' — Promoter KYC / KYB', icon:'check', files: kycPromFiles });
 
     // 6. Project (SPV) KYC / KYB
     var kycSpvFiles = [].concat(
@@ -2133,7 +2131,7 @@ function renderDataRoom() {
   return '<div class="page-header">' +
     '<div>' +
       '<div class="page-title">Data Room</div>' +
-      '<div class="page-subtitle">All uploaded files, documents &amp; images</div>' +
+      '<div class="page-subtitle">All uploaded files, documents and images</div>' +
     '</div>' +
     '<div style="font-size:13px;color:var(--text3);background:var(--surface2);border-radius:8px;padding:6px 14px;font-weight:600">' +
       totalFiles + ' total file' + (totalFiles !== 1 ? 's' : '') +
@@ -2246,8 +2244,8 @@ function renderPipeline() {
     { num:6, label:'Definitive Agreement', color:'#059669', bg:'#D1FAE5' }
   ];
 
-  var header = '<div class="page-header"><div><div class="page-title">Capital Raise</div>' +
-    '<div class="page-subtitle">Investor interactions and phase progress</div></div>' +
+  var header = '<div class="page-header"><div><div class="page-title">Capital Raise Tracker</div>' +
+    '<div class="page-subtitle">Monitor investor interactions and phase progress</div></div>' +
     '<button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="reloadPipeline()">&#8635; Refresh</button></div>';
 
   if (PipelineState.loading || PipelineState.records === null) {
@@ -2312,7 +2310,7 @@ function renderPipeline() {
             '</div>' +
             '<div class="pipe-proj-meta">' +
               '<div class="pipe-proj-stat"><span class="pipe-proj-stat-label">Project Cost</span><span class="pipe-proj-stat-val">' + esc(pd.projectCost) + '</span></div>' +
-              '<div class="pipe-proj-stat"><span class="pipe-proj-stat-label">Capital Type</span><span class="pipe-proj-stat-val">' + esc(pd.fundingType) + '</span></div>' +
+              '<div class="pipe-proj-stat"><span class="pipe-proj-stat-label">Finance Type</span><span class="pipe-proj-stat-val">' + esc(pd.fundingType) + '</span></div>' +
               '<div class="pipe-proj-stat"><span class="pipe-proj-stat-label">Area</span><span class="pipe-proj-stat-val">' + esc(pd.area) + '</span></div>' +
               '<div class="pipe-proj-stat"><span class="pipe-proj-stat-label">Timeline</span><span class="pipe-proj-stat-val">' + esc(pd.timeline) + '</span></div>' +
               (pd.created ? '<div class="pipe-proj-stat"><span class="pipe-proj-stat-label">Created</span><span class="pipe-proj-stat-val">' + esc(pd.created) + '</span></div>' : '') +
@@ -2398,7 +2396,7 @@ function renderPipeline() {
 
   return header +
     selectorHtml +
-    '<div class="info-box amber" style="margin:0 0 14px">Pipeline is managed by the CCM expert. Promotor action is available at <strong>Phase 1 — Interest Received</strong> (Unlock / Deny) and <strong>Phase 3 — Data Room Access</strong> (Grant / Deny).</div>' +
+    '<div class="info-box amber" style="margin:0 0 14px">Pipeline is managed by the CCM expert. Promoter action is available at <strong>Phase 1 — Interest Received</strong> (Unlock / Deny) and <strong>Phase 3 — Data Room Access</strong> (Grant / Deny).</div>' +
     '<div class="kanban">' + cols + '</div>';
 }
 
@@ -2688,7 +2686,7 @@ function toggleProjectLock(projectId) {
     var lockSvgClosed = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>';
     var lockSvgOpen   = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>';
     btn.innerHTML = (newLocked ? lockSvgClosed : lockSvgOpen) +
-      '<div class="lock-tooltip">' + (newLocked ? '&#128274; Identity Hidden — Disclosed on Acceptance by Promotor' : '&#128275; Identity Visible — Click to Lock') + '</div>';
+      '<div class="lock-tooltip">' + (newLocked ? '&#128274; Identity Hidden — Disclosed on Acceptance by Promoter' : '&#128275; Identity Visible — Click to Lock') + '</div>';
   }
 
   // Update Zoho record
@@ -3099,7 +3097,7 @@ function applyCurrencyConversion() {
       'Grant_Subsidy_Sought_USD': req.Grant_Subsidy_Sought_USD,
       'Equity_Required_USD': req.Equity_Required_USD,
       'Debt_Required_USD': req.Debt_Required_USD,
-      'Promotor_Equity_USD': req.Promotor_Equity_USD
+      'Promoter_Equity_USD': req.Promoter_Equity_USD
     };
     // console.log('[CCM][Currency] Onboarding capital fields (INR base values):');
     Object.keys(capFields).forEach(function(k) {
@@ -3380,29 +3378,11 @@ function renderSettings() {
     '<div class="page-header"><div><div class="page-title">Settings</div>' +
     '<div class="page-subtitle">Manage your account preferences</div></div></div>' +
 
-    /* ── Security ── */
-    '<div class="stg-section">' +
-      '<div class="stg-section-hdr">' +
-        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
-        '<div class="stg-section-title">Security</div>' +
-      '</div>' +
-      '<div class="stg-row">' +
-        '<div class="stg-row-info">' +
-          '<div class="stg-row-label">Password &amp; MFA</div>' +
-          '<div class="stg-row-desc">Reset your password or manage Multi-Factor Authentication</div>' +
-        '</div>' +
-        '<a href="' + ZOHO_PROFILE_URL + '" target="_blank" class="btn btn-outline" style="white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px">' +
-          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
-          'Reset Password / MFA' +
-        '</a>' +
-      '</div>' +
-    '</div>' +
-
     /* ── Currency & Display ── */
     '<div class="stg-section">' +
       '<div class="stg-section-hdr">' +
         '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5a2 2 0 010 4h-5v4"/><path d="M9.5 12h5.5"/></svg>' +
-        '<div class="stg-section-title">Currency &amp; Display</div>' +
+        '<div class="stg-section-title">Currency and Display</div>' +
       '</div>' +
       selectRow('currency', 'Default Currency', 'Changing this updates your registration record',
         (function(){
@@ -3435,6 +3415,24 @@ function renderSettings() {
       saveBtn('stg-save-display', 'saveDisplaySettings') +
     '</div>' +
 
+    /* ── Security ── */
+    '<div class="stg-section">' +
+      '<div class="stg-section-hdr">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
+        '<div class="stg-section-title">Security</div>' +
+      '</div>' +
+      '<div class="stg-row">' +
+        '<div class="stg-row-info">' +
+          '<div class="stg-row-label">Password and MFA</div>' +
+          '<div class="stg-row-desc">Reset your password or manage Multi-Factor Authentication</div>' +
+        '</div>' +
+        '<a href="' + ZOHO_PROFILE_URL + '" target="_blank" class="btn btn-outline" style="white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
+          'Reset Password / MFA' +
+        '</a>' +
+      '</div>' +
+    '</div>' +
+
     /* ── Notifications ── */
     '<div class="stg-section">' +
       '<div class="stg-section-hdr">' +
@@ -3444,7 +3442,7 @@ function renderSettings() {
       toggle('notifEmail',     'Email Notifications',    'Receive updates to your registered email address') +
       toggle('notifPipeline',  'Pipeline Activity',      'Investor interest, approvals, and phase changes') +
       toggle('notifCert',      'Certification Updates',  'Phase progress and expert review milestones') +
-      toggle('notifMarketing', 'Marketing &amp; Promotions', 'News, webinars, and CCM platform updates') +
+      toggle('notifMarketing', 'Marketing and Promotions', 'News, webinars, and CCM platform updates') +
       saveBtn('stg-save-notif', 'saveNotifSettings') +
     '</div>'
   );
@@ -3898,7 +3896,7 @@ function reloadCertification() {
   ZOHO.CREATOR.DATA.getRecords({
     app_name:    ZOHO_CFG.appName,
     report_name: ZOHO_CFG.reports.certification,
-    criteria:    'Promotor == ' + ProfileState.recordId,
+    criteria:    'Promoter == ' + ProfileState.recordId,
     page:        1,
     per_page:    200
   }).then(function(resp) {
@@ -3945,7 +3943,7 @@ function reloadPipeline() {
   ZOHO.CREATOR.DATA.getRecords({
     app_name:    ZOHO_CFG.appName,
     report_name: ZOHO_CFG.reports.pipeline,
-    criteria:    'Promotor == ' + ProfileState.recordId,
+    criteria:    'Promoter == ' + ProfileState.recordId,
     page:        1,
     per_page:    200
   }).then(function(resp) {
@@ -4011,7 +4009,7 @@ function reloadPipeline() {
       var actionsField = pipeStr(r.Actions_field) || pipeStr(r.Actions) || '';
       var grantAccess  = pipeStr(r.Grant_Access) || '';
 
-      var showApprove         = (r.Promotor_Action_Required === true || r.Promotor_Action_Required === 'true')
+      var showApprove         = (r.Promoter_Action_Required === true || r.Promoter_Action_Required === 'true')
                                 || actionsField.toLowerCase().includes('approve') || actionsField.toLowerCase().includes('deny');
       var showDisclosurePhase2 = actionsField.toLowerCase().includes('disclosure') || actionsField.toLowerCase().includes('phase 2');
 
@@ -4209,7 +4207,7 @@ function initZoho() {
           var cachedId = sessionStorage.getItem(ssKey);
           if (cachedId) {
             ProfileState.recordId = cachedId;
-            // console.log('[CCM] Promotor ID loaded from session cache:', cachedId);
+            // console.log('[CCM] Promoter ID loaded from session cache:', cachedId);
           }
           fetchRegistrationByEmail(email).catch(function(){ return null; }).then(function(rec) {
             ProfileState.record = rec;
@@ -4217,9 +4215,9 @@ function initZoho() {
               ProfileState.recordId = rec.ID;
               // Persist promotor ID to sessionStorage for instant access on reload
               try { sessionStorage.setItem(ssKey, rec.ID); } catch(e) {}
-              // console.log('[CCM] Promotor ID cached in session:', rec.ID);
+              // console.log('[CCM] Promoter ID cached in session:', rec.ID);
               // Update navbar with real name from record
-              var name = rec.Promotor_Name || {};
+              var name = rec.Promoter_Name || {};
               var fullName = [name.first_name, name.last_name].filter(Boolean).join(' ') || email.split('@')[0];
               document.getElementById('navName').textContent = fullName;
               document.getElementById('navAvatar').textContent = (name.first_name||email).charAt(0).toUpperCase();
@@ -4331,7 +4329,7 @@ function renderProfile() {
   }
 
   /* ── extract fields directly from Zoho record ── */
-  var promName   = (rec && rec.Promotor_Name) ? rec.Promotor_Name : {};
+  var promName   = (rec && rec.Promoter_Name) ? rec.Promoter_Name : {};
   var addr       = (rec && rec.Address)       ? rec.Address       : {};
   if (rec) { console.log('[CCM Profile] Address keys:', Object.keys(addr), '| raw:', JSON.stringify(addr)); }
 
@@ -4439,7 +4437,7 @@ function renderProfile() {
           rv('Website',         website, true) +
           rv('CIN',             cin)    +
           rv('GSTIN',           gstin)  +
-          rv('Annual Turnover', turnover) +
+          rv('Annual Revenue', turnover) +
           rvFull('Company Description', description) +
           '<div class="pf-row gfull"><div class="pf-label">Sector Focus</div><div class="pf-chips" style="margin-top:4px">' + sectorChips + '</div></div>' +
         '</div>' +
@@ -4479,7 +4477,7 @@ function openProfileEdit() {
   var p   = DATA.profile;
   var rec = ProfileState.record;
   if (rec) {
-    var name = rec.Promotor_Name || {};
+    var name = rec.Promoter_Name || {};
     p = {
       firstName:         name.first_name || rec.first_name || '',
       lastName:          name.last_name  || rec.last_name  || '',
@@ -4629,7 +4627,7 @@ function openProfileEdit() {
           '</div>' +
 
           '<div class="f">' +
-            '<label class="fl" for="pfe_turnover">Annual Turnover <span class="opt">(optional)</span></label>' +
+            '<label class="fl" for="pfe_turnover">Annual Revenue <span class="opt">(optional)</span></label>' +
             '<div class="prow has-suffix">' +
               (function(){
                 var raw = parseFloat(p.annualTurnover);
@@ -4744,7 +4742,7 @@ function saveProfileUpdate() {
 
   var payload = {
     data: {
-      Promotor_Name: { first_name: gv('pfe_fname'), last_name: gv('pfe_lname') },
+      Promoter_Name: { first_name: gv('pfe_fname'), last_name: gv('pfe_lname') },
       Mobile_Number:    gv('pfe_mobile'),
       Designation:      gv('pfe_desig'),
       LinkedIn_profile: linkedin && linkedin.startsWith('http') ? { url: linkedin, title: linkedin } : undefined,
@@ -4830,7 +4828,7 @@ function doUpdate(payload, msgEl) {
 
 /* Sync changes back to DATA.profile (local fallback) */
 function updateLocalProfile(d) {
-  var n = d.Promotor_Name || {};
+  var n = d.Promoter_Name || {};
   if (n.first_name) DATA.profile.firstName = n.first_name;
   if (n.last_name)  DATA.profile.lastName  = n.last_name;
   if (d.Mobile_Number)    DATA.profile.mobile          = d.Mobile_Number;
@@ -4881,7 +4879,7 @@ function reloadProfile() {
       if (rec) {
         ProfileState.recordId = rec.ID;
         // Update navbar with real name
-        var name = rec.Promotor_Name || {};
+        var name = rec.Promoter_Name || {};
         var fullName = [name.first_name, name.last_name].filter(Boolean).join(' ') || ProfileState.loginEmail || '';
         if (fullName) {
           document.getElementById('navName').textContent = fullName;
@@ -4903,6 +4901,71 @@ function reloadProfile() {
 renderSidebar(true);
 showTab('dashboard');
 initZoho();
+
+/* ── Expert Chat ─────────────────────────────────────────────── */
+function openExpertChat() {
+  document.getElementById('expertChatPanel').style.display = 'flex';
+  document.getElementById('expertChatInput').focus();
+}
+function closeExpertChat() {
+  document.getElementById('expertChatPanel').style.display = 'none';
+}
+function sendExpertChatMsg() {
+  var input = document.getElementById('expertChatInput');
+  var msg = (input.value || '').trim();
+  if (!msg) return;
+  var feed = document.getElementById('expertChatFeed');
+  var ts = new Date().toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
+  feed.innerHTML +=
+    '<div style="display:flex;justify-content:flex-end;margin-bottom:8px">' +
+      '<div style="max-width:75%;background:var(--accent);color:#fff;padding:8px 12px;border-radius:12px 12px 2px 12px;font-size:13px">' +
+        esc(msg) +
+        '<div style="font-size:10px;opacity:.7;margin-top:3px;text-align:right">' + ts + '</div>' +
+      '</div>' +
+    '</div>';
+  feed.scrollTop = feed.scrollHeight;
+  input.value = '';
+  /* Auto-reply placeholder */
+  setTimeout(function() {
+    feed.innerHTML +=
+      '<div style="display:flex;margin-bottom:8px">' +
+        '<div style="max-width:75%;background:var(--bg2,#f3f4f6);color:var(--text1);padding:8px 12px;border-radius:12px 12px 12px 2px;font-size:13px">' +
+          'Thank you for your message. A CCM expert will respond shortly.' +
+          '<div style="font-size:10px;color:var(--text4);margin-top:3px">' + ts + '</div>' +
+        '</div>' +
+      '</div>';
+    feed.scrollTop = feed.scrollHeight;
+  }, 800);
+}
 </script>
+
+<!-- Expert Chat Panel -->
+<div id="expertChatPanel" style="display:none;position:fixed;bottom:24px;right:24px;width:340px;max-height:500px;
+  background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);z-index:1200;
+  flex-direction:column;overflow:hidden;border:1px solid var(--border)">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;
+    background:var(--accent);color:#fff;border-radius:16px 16px 0 0">
+    <div style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+      </svg>
+      Chat with Expert
+    </div>
+    <button onclick="closeExpertChat()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;line-height:1;padding:0">&#x2715;</button>
+  </div>
+  <div id="expertChatFeed" style="flex:1;overflow-y:auto;padding:14px;min-height:200px;max-height:320px;background:var(--bg)">
+    <div style="display:flex;margin-bottom:8px">
+      <div style="max-width:85%;background:var(--bg2,#f3f4f6);color:var(--text1);padding:8px 12px;border-radius:12px 12px 12px 2px;font-size:13px">
+        Hello! How can a CCM expert help you today?
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:#fff">
+    <input id="expertChatInput" type="text" placeholder="Type your message…"
+      style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;outline:none"
+      onkeydown="if(event.key==='Enter')sendExpertChatMsg()"/>
+    <button onclick="sendExpertChatMsg()" class="btn btn-green btn-sm" style="padding:8px 12px">Send</button>
+  </div>
+</div>
 </body>
 </html>
